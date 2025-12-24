@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+  <Tracking>
+    <ImageTarget name="ar_circuit_marker" size="0.190000 0.126667" />
+  </Tracking>
+</QCARConfig>
