@@ -30,8 +30,7 @@ public class PinRaycaster : MonoBehaviour
 
     void OnTap(InputAction.CallbackContext ctx)
     {
-        Vector2 screenPos =
-            Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed
+        Vector2 screenPos = Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed
             ? Touchscreen.current.primaryTouch.position.ReadValue()
             : Pointer.current.position.ReadValue();
 
@@ -40,14 +39,18 @@ public class PinRaycaster : MonoBehaviour
 
         BPinID pin = hit.transform.GetComponent<BPinID>();
         if (pin == null) return;
-
-        // IMPORTANT: only child pins have colliders
         if (pin.role == BPinRole.Parent) return;
+
+        if (WireManager.Instance.HasActiveWire)
+        {
+            // Finish the wire and DON'T show the menu
+            WireManager.Instance.SelectEndpoint(pin);
+            return; 
+        }
 
         selectedPin = pin;
         ShowRadialMenu(pin.transform.position);
     }
-
     void ShowRadialMenu(Vector3 pos)
     {
         radialMenuCanvas.SetActive(true);
@@ -72,4 +75,15 @@ public class PinRaycaster : MonoBehaviour
         selectedPin = null;
         radialMenuCanvas.SetActive(false);
     }
+
+    public void HideRadialMenu()
+    {
+        radialMenuCanvas.SetActive(false);
+    }
+
+    public void EnableMenu()
+    {
+        radialMenuCanvas.SetActive(true);
+    }
+
 }

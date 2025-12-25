@@ -1,40 +1,58 @@
-// using UnityEngine;
+using UnityEngine;
 
-// [RequireComponent(typeof(LineRenderer))]
-// public class Wire : MonoBehaviour
-// {
-//     public BPinID startPin;
-//     public BPinID endPin;
+[RequireComponent(typeof(LineRenderer))]
+public class Wire : MonoBehaviour
+{
+    public BPinID startPin;
+    public BPinID endPin;
 
-//     LineRenderer lr;
-//     Camera cam;
+    [Header("Visual Tuning")]
+    [Tooltip("Small vertical offset to avoid z-fighting with breadboard")]
+    public float liftAmount = 0.002f;
 
-//     void Awake()
-//     {
-//         lr = GetComponent<LineRenderer>();
-//         lr.positionCount = 2;
-//         cam = Camera.main;
-//     }
+    private LineRenderer lr;
 
-//     void Update()
-//     {
-//         if (startPin == null) return;
+    void Awake()
+    {
+        lr = GetComponent<LineRenderer>();
 
-//         // Start is always the start pin
-//         lr.SetPosition(0, startPin.transform.position);
+        // Safety defaults (in case prefab is misconfigured)
+        lr.positionCount = 2;
+        lr.useWorldSpace = true;
+    }
 
-//         if (endPin != null)
-//         {
-//             // Final connection
-//             lr.SetPosition(1, endPin.transform.position);
-//         }
-//         else
-//         {
-//             // 🔥 FOLLOW MOUSE while dragging
-//             Vector3 mousePos = Input.mousePosition;
-//             mousePos.z = 0.5f; // distance from camera (IMPORTANT)
-//             Vector3 worldPos = cam.ScreenToWorldPoint(mousePos);
-//             lr.SetPosition(1, worldPos);
-//         }
-//     }
-// }
+    // Called when first pin is selected
+    public void SetStart(BPinID pin)
+    {
+        startPin = pin;
+
+        Vector3 liftedPos = GetLiftedPinPosition(pin);
+        lr.SetPosition(0, liftedPos);
+        lr.SetPosition(1, liftedPos);
+    }
+
+    // Called while dragging
+    public void UpdateEnd(Vector3 worldPos)
+    {
+        if (startPin == null) return;
+
+        lr.SetPosition(0, GetLiftedPinPosition(startPin));
+        lr.SetPosition(1, worldPos);
+    }
+
+    // Called when second pin is selected
+    public void SetEnd(BPinID pin)
+    {
+        endPin = pin;
+
+        lr.SetPosition(0, GetLiftedPinPosition(startPin));
+        lr.SetPosition(1, GetLiftedPinPosition(pin));
+    }
+
+    // --- Helper ---
+    Vector3 GetLiftedPinPosition(BPinID pin)
+    {
+        // Lift along board normal (important for tilted AR boards)
+        return pin.transform.position + pin.transform.up * liftAmount;
+    }
+}

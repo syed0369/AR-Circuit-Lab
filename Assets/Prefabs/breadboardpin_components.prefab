@@ -73,6 +73,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3233237143003626261, guid: e02fdb521e404eb41b8658fdb0966bd0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6489692312023432740, guid: e02fdb521e404eb41b8658fdb0966bd0,
         type: 3}
       propertyPath: row
@@ -93,8 +98,52 @@ PrefabInstance:
       propertyPath: m_Name
       value: breadboardpin_components
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8587110172891785609, guid: e02fdb521e404eb41b8658fdb0966bd0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8567868101460895383, guid: e02fdb521e404eb41b8658fdb0966bd0,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -1522386760962236755}
+    - targetCorrespondingSourceObject: {fileID: 8567868101460895383, guid: e02fdb521e404eb41b8658fdb0966bd0,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -5021152635954975285}
   m_SourcePrefab: {fileID: 100100000, guid: e02fdb521e404eb41b8658fdb0966bd0, type: 3}
+--- !u!1 &5407803180232172291 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8567868101460895383, guid: e02fdb521e404eb41b8658fdb0966bd0,
+    type: 3}
+  m_PrefabInstance: {fileID: 4461746665603024276}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &-1522386760962236755
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5407803180232172291}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &-5021152635954975285
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5407803180232172291}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}

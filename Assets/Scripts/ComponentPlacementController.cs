@@ -13,7 +13,7 @@ public class ComponentPlacementController : MonoBehaviour
 
     public GameObject ledPrefab;
     public GameObject resistorPrefab;
-
+    public GameObject wirePrefab;
     // ---- Called from Radial Menu Buttons ----
 
     public void OnSelectLED()
@@ -74,14 +74,22 @@ public class ComponentPlacementController : MonoBehaviour
 
     void HandleWire(BPinID pin)
     {
-        if (pin.role == BPinRole.Parent)
+        if (!WireManager.Instance.HasActiveWire)
         {
-            Debug.Log("Wire must be placed on L or R pin, not Parent");
+            // FIRST PIN SELECTED
+            WireManager.Instance.StartWire(wirePrefab, pin);
+
+            // 🔥 Disable Radial Menu ONLY
+            raycaster.HideRadialMenu();
+
             return;
         }
 
-        Debug.Log($"Wire endpoint selected: {pin.nodeId}");
-        // Later:
-        // WireManager.SelectEndpoint(pin);
+        // SECOND PIN SELECTED
+        WireManager.Instance.SelectEndpoint(pin);
+
+        // 🔥 Re-enable menu for next component
+        raycaster.EnableMenu();
     }
+
 }
