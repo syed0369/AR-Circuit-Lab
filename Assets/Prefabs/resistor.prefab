@@ -61,7 +61,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 986f7857e1d22fa4e81b35ea85c26284,
         type: 3}
       propertyPath: m_Name
-      value: resistor 1
+      value: resistor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -90,6 +90,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d94eef5c995060c4aae3732bd1bc3754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  liftAmount: 0.0008
-  uniformScale: 10
-  rotationOffsetEuler: {x: 90, y: 0, z: 90}
+  liftAmount: 0.0004
+  uniformScale: 20
+  rotationOffsetEuler: {x: -90, y: 0, z: 0}

@@ -82,4 +82,20 @@ public class WireManager : MonoBehaviour
         activeWire = null;
         firstPin = null;
     }
+
+
+    public void SelectEndpointArduino(APinID pin)
+    {
+        if (activeWire == null || firstPin == null) return;
+
+        // For now just end wire using pin position
+        activeWire.UpdateEnd(pin.transform.position);
+
+        // ❗ Later: we will connect electrical node graph here
+        Debug.Log($"Wire ended on Arduino pin: {pin.pinName}");
+
+        activeWire = null;
+        firstPin = null;
+    }
+
 }

@@ -92,6 +92,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   liftAmount: 0.0025
-  uniformScale: 25
-  rotationOffsetEuler: {x: 0, y: 0, z: 0}
+  uniformScale: 30
+  rotationOffsetEuler: {x: 0, y: -90, z: 0}
   anodeIsOnRight: 1
+  ledColor: 
+  arduinoPin: 
+  isConfigured: 0
+  delaySeconds: 1
+  ledRenderer: {fileID: 8556670844719515062}
+--- !u!23 &8556670844719515062 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -1544515498370993478, guid: 8829bf1d929dcec47a5eccadc769bc07,
+    type: 3}
+  m_PrefabInstance: {fileID: 2031019640551913228}
+  m_PrefabAsset: {fileID: 0}

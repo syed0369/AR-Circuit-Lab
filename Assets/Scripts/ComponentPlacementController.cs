@@ -70,6 +70,18 @@ public class ComponentPlacementController : MonoBehaviour
         Debug.Log($"Instantiated {obj.name}");
         obj.GetComponent<TwoPinComponentBase>()
         .AttachToParentPin(parentPin);
+        raycaster.HideRadialMenu();
+        if(type == ComponentType.LED)
+        {
+            var led = obj.GetComponent<LEDComponent>();
+            
+            // find clicked world position from parent pin
+            Vector3 pos = parentPin.transform.position;
+            Transform board = parentPin.transform.parent;
+
+            LEDSettingsUI.Instance.Open(led, pos, board);
+        }
+
     }
 
     void HandleWire(BPinID pin)

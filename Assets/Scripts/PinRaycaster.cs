@@ -37,19 +37,32 @@ public class PinRaycaster : MonoBehaviour
         Ray ray = cam.ScreenPointToRay(screenPos);
         if (!Physics.Raycast(ray, out RaycastHit hit)) return;
 
-        BPinID pin = hit.transform.GetComponent<BPinID>();
-        if (pin == null) return;
-        if (pin.role == BPinRole.Parent) return;
-
-        if (WireManager.Instance.HasActiveWire)
+        BPinID bPin = hit.transform.GetComponent<BPinID>();
+        if (bPin != null)
         {
-            // Finish the wire and DON'T show the menu
-            WireManager.Instance.SelectEndpoint(pin);
-            return; 
+            if (WireManager.Instance.HasActiveWire)
+            {
+                WireManager.Instance.SelectEndpoint(bPin);
+                return;
+            }
+
+            if (bPin.role == BPinRole.Parent) return;
+            selectedPin = bPin;
+            ShowRadialMenu(bPin.transform.position);
+            return;
         }
 
-        selectedPin = pin;
-        ShowRadialMenu(pin.transform.position);
+        APinID aPin = hit.transform.GetComponent<APinID>();
+        if (aPin != null)
+        {
+
+            if (WireManager.Instance.HasActiveWire)
+            {
+                WireManager.Instance.SelectEndpointArduino(aPin);
+            }
+
+            return;
+        }
     }
     void ShowRadialMenu(Vector3 pos)
     {
