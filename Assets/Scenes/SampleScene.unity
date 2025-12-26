@@ -4406,7 +4406,7 @@ PrefabInstance:
     - target: {fileID: 2880358518700645775, guid: b8b9c820b9f4e2b4e841780894c1d0c8,
         type: 3}
       propertyPath: pinName
-      value: 0-RX
+      value: D0
       objectReference: {fileID: 0}
     - target: {fileID: 8817581518590775824, guid: b8b9c820b9f4e2b4e841780894c1d0c8,
         type: 3}
@@ -7800,7 +7800,7 @@ PrefabInstance:
     - target: {fileID: 2880358518700645775, guid: b8b9c820b9f4e2b4e841780894c1d0c8,
         type: 3}
       propertyPath: pinName
-      value: 1-TX
+      value: D1
       objectReference: {fileID: 0}
     - target: {fileID: 8817581518590775824, guid: b8b9c820b9f4e2b4e841780894c1d0c8,
         type: 3}

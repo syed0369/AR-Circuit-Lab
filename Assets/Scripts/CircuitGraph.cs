@@ -46,4 +46,21 @@ public class CircuitGraph : MonoBehaviour
         }
         return false;
     }
+    public bool IsNodeConflict(string node, string newPin)
+    {
+        // If the node doesn't exist yet, no conflict
+        if (!edges.ContainsKey(node)) return false;
+
+        foreach (var connectedNode in edges[node])
+        {
+            // If any connected node is another Arduino pin with a DIFFERENT name
+            if (connectedNode.StartsWith("ARD_D") || connectedNode == "ARD_5V" || connectedNode == "ARD_3.3V")
+            {
+                if (connectedNode != newPin)
+                    return true;
+            }
+        }
+        return false;
+    }
+
 }

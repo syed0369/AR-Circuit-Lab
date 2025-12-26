@@ -103,7 +103,14 @@ public class WireManager : MonoBehaviour
 
         // 🧠 LOGICAL GRAPH CONNECTION
         string from = firstPin.nodeId;
-        string to = $"ARD_{aPin.pinName}";
+        string to = $"ARD_{aPin.pinName}";        
+        if (CircuitGraph.Instance.IsNodeConflict(from, to))
+        {
+            Debug.LogError($"❌ Conflict: {from} already has another Arduino pin connected!");
+            // Optionally show UI popup
+            CancelWire();
+            return;
+        }
         CircuitGraph.Instance.Connect(from, to);
 
         Debug.Log($"📌 Wire connected from Breadboard {from} → Arduino {aPin.pinName}");
