@@ -97,9 +97,19 @@ MonoBehaviour:
   anodeIsOnRight: 1
   ledColor: 
   arduinoPin: 
-  isConfigured: 0
   delaySeconds: 1
+  isConfigured: 0
   ledRenderer: {fileID: 8556670844719515062}
+  anodeNodeId: 
+  cathodeNodeId: 
+  redOff: {fileID: 2100000, guid: a2c46013462ab244180e73f96e74ef0d, type: 2}
+  redOn: {fileID: 2100000, guid: ef8d2ca20ec96b84e85b6fba4bd4b91c, type: 2}
+  greenOff: {fileID: 2100000, guid: 8e0c5f4f5d9924b409ace00bbd4bb648, type: 2}
+  greenOn: {fileID: 2100000, guid: 485b29146ae7c33449707e87c684c5d4, type: 2}
+  yellowOff: {fileID: 2100000, guid: c4c69b5bcec09ac46bf449c043064fba, type: 2}
+  yellowOn: {fileID: 2100000, guid: bc264499397c9be4b95332afc14ac645, type: 2}
+  offMat: {fileID: 0}
+  onMat: {fileID: 0}
 --- !u!23 &8556670844719515062 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -1544515498370993478, guid: 8829bf1d929dcec47a5eccadc769bc07,

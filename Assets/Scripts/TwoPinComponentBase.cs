@@ -62,5 +62,11 @@ public abstract class TwoPinComponentBase : MonoBehaviour
 
         // 7. Scale
         transform.localScale = Vector3.one * uniformScale;
+
+        if (TryGetComponent<LEDComponent>(out LEDComponent led))
+        {
+            led.InitializeNodeIDs();
+        }
+
     }
 }

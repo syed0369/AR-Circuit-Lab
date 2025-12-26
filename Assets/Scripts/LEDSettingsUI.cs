@@ -55,32 +55,44 @@ public class LEDSettingsUI : MonoBehaviour
 
     public void Apply()
     {
-        if (targetLED != null)
-        {
-            // 1. Save Data
-            string selectedColor = colorDropdown.options[colorDropdown.value].text;
-            targetLED.ledColor = selectedColor;
-            targetLED.arduinoPin = pinDropdown.options[pinDropdown.value].text;
-            float.TryParse(delayInput.text, out targetLED.delaySeconds);
-            targetLED.isConfigured = true;
+        if (targetLED == null) return;
 
-            // 2. Change Material
-            UpdateLEDMaterial(selectedColor);
+        // Read UI inputs
+        string selectedColor = colorDropdown.options[colorDropdown.value].text;
+        targetLED.ledColor = selectedColor;
+        targetLED.arduinoPin = pinDropdown.options[pinDropdown.value].text;
+        float.TryParse(delayInput.text, out targetLED.delaySeconds);
+        targetLED.isConfigured = true;
+
+        // 💡 Assign the material sets to ON/OFF mats
+        switch (selectedColor)
+        {
+            case "Red":
+                targetLED.offMat = targetLED.redOff;
+                targetLED.onMat  = targetLED.redOn;
+                break;
+
+            case "Green":
+                targetLED.offMat = targetLED.greenOff;
+                targetLED.onMat  = targetLED.greenOn;
+                break;
+
+            case "Yellow":
+                targetLED.offMat = targetLED.yellowOff;
+                targetLED.onMat  = targetLED.yellowOn;
+                break;
         }
 
+        // 💡 VISUALLY SET IT NOW
+        targetLED.ledRenderer.material = targetLED.offMat;
+
+        // Debug confirmation
+        Debug.Log($"LED SET → Color={selectedColor}, ON={targetLED.onMat.name}, OFF={targetLED.offMat.name}");
+
+        // Close UI
         LEDCanvas.SetActive(false);
         panel.SetActive(false);
     }
 
-    private void UpdateLEDMaterial(string colorName)
-    {
-        if (targetLED.ledRenderer == null) return;
 
-        switch (colorName)
-        {
-            case "Red": targetLED.ledRenderer.material = redMat; break;
-            case "Green": targetLED.ledRenderer.material = greenMat; break;
-            case "Yellow": targetLED.ledRenderer.material = yellowMat; break;
-        }
-    }
 }

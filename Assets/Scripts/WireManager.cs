@@ -34,12 +34,21 @@ public class WireManager : MonoBehaviour
             return;
         }
 
+        // VISUAL wire placement
         activeWire.SetEnd(pin);
 
-        // later: electrical graph connect
+        // 🧠 ELECTRICAL CONNECTION LOGIC
+        string from = firstPin.nodeId;
+        string to   = pin.nodeId;
+
+        CircuitGraph.Instance.Connect(from, to);
+        Debug.Log($"📌 Wire connected: {from} ↔ {to}");
+
+        // Reset
         firstPin = null;
         activeWire = null;
     }
+
 
     void Update()
     {
@@ -84,15 +93,20 @@ public class WireManager : MonoBehaviour
     }
 
 
-    public void SelectEndpointArduino(APinID pin)
+    public void SelectEndpointArduino(APinID aPin)
     {
         if (activeWire == null || firstPin == null) return;
 
-        // For now just end wire using pin position
-        activeWire.UpdateEnd(pin.transform.position);
+        // Position wire visually
+        Vector3 endpoint = aPin.transform.position + (aPin.transform.up * 0.001f);
+        activeWire.UpdateEnd(endpoint);
 
-        // ❗ Later: we will connect electrical node graph here
-        Debug.Log($"Wire ended on Arduino pin: {pin.pinName}");
+        // 🧠 LOGICAL GRAPH CONNECTION
+        string from = firstPin.nodeId;
+        string to = $"ARD_{aPin.pinName}";
+        CircuitGraph.Instance.Connect(from, to);
+
+        Debug.Log($"📌 Wire connected from Breadboard {from} → Arduino {aPin.pinName}");
 
         activeWire = null;
         firstPin = null;

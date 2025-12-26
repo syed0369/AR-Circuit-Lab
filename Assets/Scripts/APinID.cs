@@ -12,12 +12,14 @@ public class APinID : MonoBehaviour
     // We add a NodeID for the Arduino pins as well so the 
     // WireManager can treat them like Breadboard pins.
     [HideInInspector]
-    public int arduinoNodeID; 
+    public string nodeId;
+
 
     void Awake()
     {
-        // Give each Arduino pin a unique high-range ID (e.g., 1000+) 
-        // to ensure they never clash with breadboard row IDs.
-        arduinoNodeID = 1000 + gameObject.GetInstanceID() % 1000;
+        // Node naming matches breadboard style
+        if (string.IsNullOrEmpty(nodeId))
+            nodeId = $"ARD_{pinName}";
     }
+
 }
